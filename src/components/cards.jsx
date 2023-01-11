@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
 import Moveable from "react-moveable";
 
-export function Component({ imagen, color, id, top, left, err }) {
+export function Component({
+  imagen,
+  color,
+  id,
+  top,
+  left,
+  err,
+  limitBottom,
+  limitRight,
+}) {
   const [target, setTarget] = useState();
   const [dragTarget, setDragTarget] = useState();
   const [nodoReferencia, setNodoReferencia] = useState({
@@ -87,7 +96,7 @@ export function Component({ imagen, color, id, top, left, err }) {
         throttleResize={0}
         throttleDrag={0}
         snappable={true}
-        bounds={{ left: 0, top: 0, right: 800, bottom: 500 }}
+        bounds={{ left: 0, top: 0, right: limitRight, bottom: limitBottom }}
         zoom={1}
         origin={false}
         padding={{ left: 0, top: 0, right: 0, bottom: 0 }}
