@@ -1,13 +1,17 @@
-1. Los componentes no deben de salirse del div con id "parent" al arrastrarse
+<h1 align="center">Redimensioning-of-square</h1>
 
-2. Cada componente debe de tener una imagen única, la cual con estilos propios, no debe salir del componente al que se le hace resize y deben de tener un fit diferente "cover", "contain", etc. e
-  
-  **Esta se obtiene de un fetch a la api "https://jsonplaceholder.typicode.com/photos"**
+## Descripción
 
-3. Se debe de mantener la selección correctamente al hacer resize o drag, desde cualquiera de los 8 puntos (es decir, debe abarcar el componente mismo, no debe de estar abarcando cosas fuera de el) **Referencia del comportamiento que se debe corregir (Video 1)**
+Este ejercicio de programación utiliza React, un marco de JavaScript para desarrollar aplicaciones web, y la librería "react-moveable" para permitir al usuario mover y redimensionar componentes en un contenedor. El objetivo es mostrar componentes en una página web y asignarles imágenes de manera aleatoria. Las imágenes se obtienen a través de una petición a una API externa. Una vez que se han obtenido las imágenes, el usuario puede utilizar la funcionalidad proporcionada por "react-moveable" para mover y redimensionar los componentes en el contenedor. El resultado final es una página web interactiva que permite al usuario personalizar la disposición de los componentes y las imágenes en ella.
 
-4. Los componentes se deben de poder eliminar de la lista de componentes
+:link: [Instruccións](./INSTRUCCIONS.md)
 
-5. (Extra) La librería tiene la capacidad de mostrar las líneas guía de cada componente, debes mostrarlas cada que se haga drag del componente seleccionado. La documentación de la librería está aquí: https://daybrush.com/moveable/release/latest/doc/
+## Vista del proyecto
 
-5. (Extra) El código entregado tiene falta de documentación en sus funciones, por lo que también deberás documentar las funciones correctamente
+![captura_del_proyecto](./assets/capture.png)
+
+## Tecnologias usadas
+
+- ReactJS
+- JavaScript
+- react-moveable

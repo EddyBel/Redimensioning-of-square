@@ -1,91 +1,51 @@
-import React, { useState, useEffect } from "react";
-import { Component } from "./components/cards";
-import { Spinner } from "./components/spinner";
-import { Button } from "./components/button";
-import { get_images } from "./services/getImages.api";
+import React from "react";
+import { Button, MoveableComponent, Spinner } from "./components/index";
 import { randomArrayElement, createId } from "./utils/functions";
-import { MoveableProps } from "./models/moveable.model";
 import { COLORS, POSITION_AND_SIZE } from "./web.config";
+import { useImages, useMoveables } from "./hooks/useContexts";
 
 export default function App() {
-  // States related to the collection of images
-  const [imagesAPI, setImagesAPI] = useState();
-  const [errorImagesApi, setErrorImagesApi] = useState(false);
+  /** Global context of the images */
+  const { images, error } = useImages();
+  const { moveables, addMoveable, cleanMoveables } = useMoveables();
 
-  // States related to moveables
-  const [moveableComponents, setMoveableComponents] = useState([]);
-  const [lastMoveable, setLastMoveable] = useState();
-
-  /** Adds an element to the container */
-  const addMoveable = () => {
+  /** Adds an element to the container
+   * @returns {void} The function returns nothing
+   */
+  const addComponent = () => {
+    // Get the parent element given its id
     const parent = document.getElementById("parent");
 
-    let id = createId();
-    let color = randomArrayElement(COLORS);
-    let image = !imagesAPI ? null : randomArrayElement(imagesAPI).url;
-    let left = POSITION_AND_SIZE.left;
-    let top = POSITION_AND_SIZE.top;
-    let width = POSITION_AND_SIZE.width;
-    let height = POSITION_AND_SIZE.height;
-    let error = errorImagesApi;
-    let limitBottom = parent.clientHeight;
-    let limitRight = parent.clientWidth;
+    // Extract all the properties that the moveable component will have
+    const MoveableObject = {
+      id: createId(),
+      color: randomArrayElement(COLORS),
+      left: POSITION_AND_SIZE.left,
+      top: POSITION_AND_SIZE.top,
+      width: POSITION_AND_SIZE.width,
+      height: POSITION_AND_SIZE.height,
+      limitBottom: parent.clientHeight,
+      limitRight: parent.clientWidth,
+      img: !images ? null : randomArrayElement(images).url,
+      error: error,
+    };
 
-    const moveableProps = new MoveableProps(
-      id,
-      color,
-      image,
-      error,
-      width,
-      height,
-      left,
-      top,
-      limitBottom,
-      limitRight
-    );
-
-    setLastMoveable([lastMoveable]);
-    setMoveableComponents([...moveableComponents, moveableProps]);
+    // Adds the properties of moveables
+    addMoveable(MoveableObject);
   };
-
-  /** Removes all items from the container  */
-  const removeMoveable = () => {
-    setMoveableComponents([]);
-  };
-
-  /** State that controls image requests  */
-  useEffect(() => {
-    get_images()
-      .then((response) => {
-        setImagesAPI(response);
-        setErrorImagesApi(false);
-      })
-      .catch(setErrorImagesApi(true));
-  }, []);
 
   return (
     <main className="App">
       <div className="app__container__buttons">
-        <Button onClick={addMoveable}>Add Moveable</Button>
-        <Button onClick={removeMoveable}>Remove Moveable</Button>
+        <Button onClick={addComponent}>Add Moveable</Button>
+        <Button onClick={cleanMoveables}>Remove Moveable</Button>
       </div>
       <div id="parent">
-        {!imagesAPI ? (
-          <Spinner />
+        {!images ? (
+          <Spinner key="Spinner-loading-images" />
         ) : (
-          moveableComponents.map((item, index) => (
-            <Component
-              {...item}
-              key={index}
-              id={index}
-              left={item.left}
-              top={item.top}
-              color={item.color}
-              err={item.error}
-              imagen={item.img}
-              limitBottom={item.limitBottom}
-              limitRight={item.limitRight}
-            />
+          moveables.map((item, index) => (
+            <MoveableComponent {...item} key={index} />
           ))
         )}
       </div>

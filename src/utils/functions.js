@@ -10,7 +10,7 @@ export const randomNumberBetween = (min, max) =>
 /**
  * Returns a random element from an array
  * @param {Array} arr - array to get random element from
- * @return {*} - random element from array
+ * @return {any} - random element from array
  */
 export const randomArrayElement = (arr) =>
   arr[Math.floor(Math.random() * arr.length)];
