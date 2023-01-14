@@ -15,3 +15,4 @@ Este ejercicio de programación utiliza React, un marco de JavaScript para desar
 - ReactJS
 - JavaScript
 - react-moveable
+- css
