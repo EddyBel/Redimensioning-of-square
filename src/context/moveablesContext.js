@@ -1,8 +1,15 @@
+/** @module Context_Moveables */
+
 import { useState, createContext } from "react";
 
 /** Context of the components */
 export const MoveableContext = createContext();
 
+/**
+ * Global provider of moveables requested by api.
+ * @param {any} children - Children to be provided by the context
+ * @returns - Moveable supplier component
+ */
 export function MoveableProvider({ children }) {
   /** Status containing the list of all moveable components */
   const [moveableComponents, setMoveableComponents] = useState([]);
