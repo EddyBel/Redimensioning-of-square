@@ -1,4 +1,4 @@
-<h1 align="center">Kosmos Challenge</h1>
+<h1 align="center">Redimensioning of square</h1>
 
 ## Descripción
 
