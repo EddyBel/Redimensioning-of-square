@@ -15,6 +15,8 @@ export function MoveableProvider({ children }) {
   const [moveableComponents, setMoveableComponents] = useState([]);
   /** Last moveable component added to the list */
   const [lastMoveable, setLastMoveable] = useState(null);
+  /** manages all the movements of each element */
+  const [nodeReference, setNodeReference] = useState({});
 
   /**
    * Function that adds a new object to the list of components to be rendered later on
@@ -27,12 +29,25 @@ export function MoveableProvider({ children }) {
   };
 
   /**
+   * This function will add a state that will save the movement of each element
+   * @param {object} moveableMove - Object with the properties to modify.
+   * @param {*} id - ID that will identify said properties
+   * @returns {void} - Returns nothing
+   */
+  const addMoveState = (moveableMove, id) =>
+    setNodeReference((prevState) => ({
+      ...prevState,
+      [id]: moveableMove,
+    }));
+
+  /**
    * Function that will clean the status of the components, in order to have an empty list.
    * @returns {void} - Returns nothing
    */
   const cleanMoveables = () => {
     setLastMoveable(null);
     setMoveableComponents([]);
+    setNodeReference({});
   };
 
   /**
@@ -47,6 +62,9 @@ export function MoveableProvider({ children }) {
     moveable: lastMoveable,
     addMoveable,
     cleanMoveables,
+    addMoveState,
+    nodeReference,
+    setNodeReference,
   };
 
   return (

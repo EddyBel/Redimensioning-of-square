@@ -6,6 +6,7 @@ import { MoveableProvider } from "./context/moveablesContext";
 import "./styles/index.css";
 import "./styles/spinner.css";
 import "./styles/button.css";
+import "./styles/list.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
