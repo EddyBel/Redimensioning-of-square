@@ -11,7 +11,8 @@ Este ejercicio de programación utiliza React, un marco de JavaScript para desar
 
 ## Vista del proyecto
 
-![captura_del_proyecto](./assets/capture.png)
+![captura_del_proyecto](./assets/Preview.png)
+![captura_del_proyecto](./assets/Preview_2.png)
 
 ## Tecnologias usadas
 
